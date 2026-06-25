@@ -8,6 +8,8 @@ Workflows
 - RSS → AI要約
 - RSS → SNS投稿
 - Gemini Summary
+- AI Summary → Threads Post
+
 
 
 Getting Started
