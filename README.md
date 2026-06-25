@@ -4,12 +4,18 @@ n8nを使ったAI自動化ワークフロー集です。
 
 Workflows
 
-- RSS → WordPress
-- RSS → AI要約
-- RSS → SNS投稿
-- Gemini Summary
+- RSS → WordPress Template
+- Gemini Summary Template
 - AI Summary → Threads Post
+- RSS → Gemini → WordPress Draft
 
+Roadmap
+
+- [ ] Gemini API Integration
+- [ ] WordPress REST API Integration
+- [ ] Duplicate Detection
+- [ ] Multi RSS Support
+- [ ] Auto Category Classification
 
 
 Getting Started
