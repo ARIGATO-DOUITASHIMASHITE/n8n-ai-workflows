@@ -7,6 +7,8 @@ Workflows
 - RSS → WordPress
 - RSS → AI要約
 - RSS → SNS投稿
+- Gemini Summary
+
 
 Getting Started
 
