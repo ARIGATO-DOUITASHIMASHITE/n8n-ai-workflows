@@ -1,0 +1,82 @@
+{
+  "name": "Threads Post Template",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "title",
+              "value": "OpenAI releases new AI model",
+              "type": "string"
+            },
+            {
+              "name": "summary",
+              "value": "The new model improves reasoning, coding and tool usage.",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "sample-news",
+      "name": "Sample News",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{threads_post:`🚀 ${$json.title}\\n\\n${$json.summary}\\n\\n#AI #OpenAI #TechNews`}}];"
+      },
+      "id": "create-post",
+      "name": "Create Threads Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sample News",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample News": {
+      "main": [
+        [
+          {
+            "node": "Create Threads Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "v0.1.0"
+}
