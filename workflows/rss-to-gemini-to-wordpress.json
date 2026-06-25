@@ -1,0 +1,106 @@
+{
+  "name": "RSS to Gemini to WordPress",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "title",
+              "value": "OpenAI announces new AI model",
+              "type": "string"
+            },
+            {
+              "name": "content",
+              "value": "OpenAI released a new model with improved reasoning and coding capabilities.",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "sample-rss-item",
+      "name": "Sample RSS Item",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{title:$json.title,summary:`Summary: ${$json.content}`}}];"
+      },
+      "id": "gemini-summary",
+      "name": "Gemini Summary Placeholder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{post_title:$json.title,post_content:$json.summary,status:'draft'}}];"
+      },
+      "id": "wordpress-draft",
+      "name": "WordPress Draft Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        950,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sample RSS Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample RSS Item": {
+      "main": [
+        [
+          {
+            "node": "Gemini Summary Placeholder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Summary Placeholder": {
+      "main": [
+        [
+          {
+            "node": "WordPress Draft Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "v0.1.0"
+}
